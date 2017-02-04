@@ -1,0 +1,21 @@
+version: "2"
+
+services:
+  registry-web:
+    image: hyper/docker-registry-web
+    external_links:
+      - registry-srv
+    environment: 
+      - REGISTRY_URL=http://registry-srv:5000/v2
+      - REGISTRY_NAME=localhost:5000
+      - REGISTRY_TRUST_ANY_SSL=true
+      - REGISTRY_BASIC_AUTH
+      - REGISTRY_READONLY=false
+    networks:
+      - registry_default
+    #ports:
+    #  - "9091:8080"
+
+networks:
+  registry_default:
+    external: true
