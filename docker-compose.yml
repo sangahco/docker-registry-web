@@ -12,7 +12,10 @@ services:
       - REGISTRY_BASIC_AUTH
       - REGISTRY_READONLY=false
     networks:
-      - registry_default
+      registry_default:
+        aliases: 
+        - registry-manager
+        - manager
     #ports:
     #  - "9091:8080"
 
