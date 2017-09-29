@@ -1,4 +1,4 @@
-version: "2"
+version: "3"
 
 services:
   registry-web:
@@ -16,6 +16,12 @@ services:
         aliases: 
         - registry-manager
         - manager
+    deploy:
+      replicas: 1
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+    restart: "unless-stopped"
     #ports:
     #  - "9091:8080"
 
