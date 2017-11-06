@@ -14,6 +14,8 @@ usage() {
 echo "Usage:  $(basename "$0") [MODE] [OPTIONS] [COMMAND]"
 echo 
 echo "Mode:"
+echo "  --sa            Standalone it doesn't require a local register running."
+echo "  --linked        Join the register network, require a local register running."
 echo
 echo "Options:"
 echo "  --help          Show this help message"
@@ -29,7 +31,7 @@ echo "  build           Build the image"
 echo "  publish         Publish the image to the registry"
 }
 
-CONF_ARG="-f docker-compose.yml"
+CONF_ARG="-f docker-compose-standalone.yml"
 
 if [ $# -eq 0 ]; then
     usage
@@ -39,6 +41,14 @@ fi
 for i in "$@"
 do
 case $i in
+    --sa)
+        CONF_ARG="-f docker-compose-standalone.yml"
+        shift
+        ;;
+    --linked)
+        CONF_ARG="-f docker-compose.yml"
+        shift
+        ;;
     --help|-h)
         usage
         exit 1

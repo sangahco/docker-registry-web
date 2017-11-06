@@ -21,9 +21,9 @@ services:
       mode: replicated
       restart_policy:
         condition: on-failure
+    ports:
+    - "${WEBUI_HTTP_PORT}:8080"
     restart: "unless-stopped"
-    #ports:
-    #  - "9091:8080"
 
 networks:
   registry_default:
