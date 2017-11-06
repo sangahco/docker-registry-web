@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  registry-web:
+    image: hyper/docker-registry-web
+    environment: 
+    - REGISTRY_URL=https://${REGISTRY_HOST}/v2
+    - REGISTRY_NAME=localhost:5000
+    - REGISTRY_TRUST_ANY_SSL=true
+    - REGISTRY_BASIC_AUTH
+    - REGISTRY_READONLY=false
+    deploy:
+      replicas: 1
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+    ports:
+    - "${WEBUI_HTTP_PORT}:8080"
+    restart: "unless-stopped"
